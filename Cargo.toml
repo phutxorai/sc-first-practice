@@ -1,5 +1,5 @@
 [package]
-name = "first-practice"
+name = "sc-first-practice"
 version = "0.1.0"
 authors = ["phutx <phu.tx@orai.io>"]
 edition = "2021"
