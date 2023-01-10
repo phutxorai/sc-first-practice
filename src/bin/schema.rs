@@ -1,6 +1,6 @@
 use cosmwasm_schema::write_api;
 
-use first_practice::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
+use sc_first_practice::msg::{ ExecuteMsg, InstantiateMsg, QueryMsg };
 
 fn main() {
     write_api! {

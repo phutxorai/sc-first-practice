@@ -1,0 +1,1 @@
+884d7347ea72aa361dbdcfddccc5f3bdf9a7ce8b9bd89441299b7d93fe141227  ./target/wasm32-unknown-unknown/release/sc_first_practice.wasm

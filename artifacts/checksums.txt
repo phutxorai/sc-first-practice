@@ -1,0 +1,1 @@
+8d2eae5032640f15c84e07aa79ca65562982a48d7964e56afda7755ab4066334  sc_first_practice.wasm

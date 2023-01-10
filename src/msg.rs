@@ -1,36 +1,32 @@
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
-use crate::state::{Entry, Priority, Status};
+use cosmwasm_schema::{ cw_serde, QueryResponses };
+use crate::state::{ Poll, Config };
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[cw_serde]
 pub struct InstantiateMsg {
-    pub owner: Option<String>,
+    pub admin_address: String, // this is string not address so that we can validate it is an address
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[cw_serde]
 pub enum ExecuteMsg {
-    NewEntry {description: String, priority: Option<Priority>},
-    UpdateEntry { id: u64, description: Option<String>, status: Option<Status>, priority: Option<Priority> },
-    DeleteEntry { id: u64 }
+    CreatePoll {
+        question: String,
+    },
+    Vote {
+        question: String, // which question to vote on
+        choice: bool, // yes or no
+    },
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[cw_serde]
+#[derive(QueryResponses)]
 pub enum QueryMsg {
-    QueryEntry {id: u64},
-    QueryList {start_after: Option<u64>, limit: Option<u32>},
+    #[returns(GetPollResponse)] GetPoll {
+        question: String,
+    },
+    #[returns(Config)] GetConfig {},
 }
 
-// We define a custom struct for each query response
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct EntryResponse {
-    pub id: u64,
-    pub description: String,
-    pub status: Status,
-    pub priority: Priority,
-}
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct ListResponse {
-    pub entries: Vec<Entry>,
+#[cw_serde]
+pub struct GetPollResponse {
+    pub poll: Option<Poll>,
 }
